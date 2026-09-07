@@ -3,14 +3,14 @@ import { ENV } from "./config/env.js";
 import { connectDB } from "./config/db.js";
 import { clerkMiddleware } from "@clerk/express";
 import { functions, inngest } from "./config/inngest.js";
-import { server } from "inngest/express";
+import { serve } from "inngest/express";
 
 const app = express();
 
 app.use(express.json());
 app.use(clerkMiddleware());    //req.auth will be available in request object 
 
-app.use("/api/inngest", server({ client: inngest, functions }));  
+app.use("/api/inngest", serve({ client: inngest, functions }));  
 
 app.get("/", (req, res) => {
     res.send("Hello World!"); 
